@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BEE &mdash; Basic Electronics Engineering Study Notes</title>
+<style type="text/css">
+
+body {
+  font-family: georgia, serif;
+  background: #f5f0e8;
+  margin: 0;
+  padding: 0;
+  color: #111;
+}
+
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+#sidebar {
+  width: 160px;
+  min-width: 160px;
+  padding: 10px 0 10px 8px;
+  background: #f5f0e8;
+  border-right: 2px solid black;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+#content_area {
+  flex: 1;
+  padding: 20px 30px 40px 20px;
+  max-width: 820px;
+}
+
+#site_header {
+  padding: 6px 10px 4px 10px;
+  border-bottom: 2px solid black;
+  background: #f5f0e8;
+}
+
+#site_header h1 {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+#site_header .sub {
+  font-size: 0.8em;
+  color: #555;
+  font-style: italic;
+  margin-left: 8px;
+}
+
+#menu_label {
+  font-size: 0.75em;
+  color: #555;
+  font-style: italic;
+  padding: 6px 0 2px 0;
+  display: block;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 4px;
+  margin-right: 8px;
+}
+
+.main_menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-right: 8px;
+}
+
+.main_menu li {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  font-size: 0.85em;
+}
+
+.main_menu li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.main_menu li a:hover { color: blue; border-bottom: 1px solid brown; }
+
+.main_menu li.active a {
+  color: red;
+  cursor: default;
+  border-bottom: 1px solid darkgreen;
+}
+
+#page_subject {
+  font-weight: bold;
+  color: darkblue;
+  font-size: 1.4em;
+  display: block;
+  border-bottom: 1px solid brown;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  margin-bottom: 14px;
+}
+
+.section-page { display: none; }
+.section-page.active { display: block; }
+
+h1.section_head {
+  display: block;
+  color: brown;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 18px 0 4px 0;
+  padding: 0;
+  border-bottom: 1px solid brown;
+}
+
+.col_head {
+  font-weight: bold;
+  color: darkgreen;
+  font-size: 1.2em;
+  display: block;
+  border-bottom: 1px solid red;
+  padding-top: 5px;
+  margin-top: 14px;
+  margin-bottom: 4px;
+}
+
+.para_heading {
+  display: block;
+  margin: 10px 0 2px 0;
+  padding: 0;
+  color: brown;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+p.para {
+  margin: 4px 0 8px 0;
+  line-height: 1.55;
+}
+
+p.para:first-letter {
+  font-size: 1.5em;
+  color: darkgreen;
+  font-family: sans-serif;
+}
+
+ul.study_list {
+  margin: 4px 0 10px 18px;
+  padding: 0;
+  font-size: 0.97em;
+  line-height: 1.75;
+}
+
+ul.study_list li { margin-bottom: 2px; }
+ul.study_list li strong { color: darkgreen; }
+
+/* NOTE boxes */
+.note_box {
+  border-left: 3px solid darkred;
+  background: #fff8f0;
+  padding: 5px 10px;
+  margin: 8px 0 10px 0;
+  font-size: 0.92em;
+  color: darkred;
+  font-style: italic;
+}
+
+.note_box strong { font-style: normal; color: darkred; }
+
+/* TIP boxes */
+.tip_box {
+  border: 1px solid darkgreen;
+  background: #f0fff0;
+  padding: 6px 10px;
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: darkgreen;
+  font-style: italic;
+}
+
+.tip_box strong { color: darkred; font-style: normal; }
+
+/* Formula / code blocks */
+pre.formula {
+  font-family: "Courier New", monospace;
+  background: #f0f0f8;
+  border: 1px solid #c0c0d8;
+  border-left: 3px solid darkblue;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 0.92em;
+  color: darkblue;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border-radius: 3px;
+}
+
+/* inline formula span */
+code.f {
+  font-family: "Courier New", monospace;
+  background: #eef;
+  color: darkblue;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 0.95em;
+}
+
+/* problem blocks */
+.problem_block {
+  border: 1px solid #aaa;
+  border-left: 4px solid darkblue;
+  background: #f8f8ff;
+  padding: 8px 12px;
+  margin: 10px 0;
+  font-size: 0.93em;
+}
+
+.problem_block .q_label {
+  font-weight: bold;
+  color: darkblue;
+  display: block;
+  margin-bottom: 4px;
+  border-bottom: 1px dotted #aaa;
+  padding-bottom: 3px;
+}
+
+.problem_block .given {
+  color: #333;
+  font-style: italic;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* tables */
+table.data_table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin: 10px 0 16px 0;
+  width: 100%;
+}
+
+table.data_table thead tr {
+  background: darkblue;
+  color: white;
+  font-weight: bold;
+}
+
+table.data_table thead td,
+table.data_table thead th {
+  padding: 5px 8px;
+  border: 1px solid #333;
+}
+
+table.data_table tbody tr:nth-child(odd)  { background: #eef3fb; }
+table.data_table tbody tr:nth-child(even) { background: #fff; }
+table.data_table tbody tr:hover { background: lightgrey; color: darkblue; }
+
+table.data_table td {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  cursor: default;
+  vertical-align: top;
+}
+
+table.data_table td.yes { background: pink; }
+table.data_table td.no  { background: lightblue; }
+table.data_table td.hl  { background: #fffacd; font-weight: bold; }
+
+hr.sect_div {
+  border: none;
+  border-top: 1px solid #bbb;
+  margin: 18px 0 10px 0;
+}
+
+/* def blocks */
+.def_block {
+  border-left: 3px solid darkgreen;
+  margin: 8px 0;
+  padding: 4px 0 4px 10px;
+  background: #fafaf5;
+  font-size: 0.95em;
+}
+
+.def_block .term   { font-weight: bold; color: darkblue; }
+.def_block .meaning { color: #333; }
+
+#ftr {
+  height: 30px;
+  background: #ffffff;
+  color: #333333;
+  font-size: xx-small;
+  border-top: 1px solid #aaa;
+  padding: 6px 10px;
+}
+
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #aaa; }
+
+</style>
+</head>
+<body>
+
+<div id="site_header">
+  <h1>Basic Electronics Engineering (BEE)</h1>
+  <span class="sub">Semiconductors &amp; Diodes &mdash; Exam Notes &mdash; 02/01/25 – 10/02/25</span>
+</div>
+
+<div id="wrapper">
+
+  <!-- ── SIDEBAR ── -->
+  <div id="sidebar">
+    <span id="menu_label">Contents</span>
+    <ul class="main_menu" id="main_nav">
+      <li class="active" onclick="show('sc_intro')"><a>1. Semiconductors</a></li>
+      <li onclick="show('materials')"><a>2. SC Materials</a></li>
+      <li onclick="show('transistor')"><a>3. Transistor &amp; Digital</a></li>
+      <li onclick="show('intrinsic')"><a>4. Intrinsic SC</a></li>
+      <li onclick="show('extrinsic')"><a>5. Extrinsic SC</a></li>
+      <li onclick="show('conductivity')"><a>6. Conductivity &amp; Mobility</a></li>
+      <li onclick="show('numericals')"><a>7. Solved Numericals</a></li>
+      <li onclick="show('diffusion')"><a>8. Diffusion Current</a></li>
+      <li onclick="show('diode')"><a>9. Diode (P-N Junction)</a></li>
+      <li onclick="show('iv_char')"><a>10. I-V Characteristics</a></li>
+      <li onclick="show('temp_effect')"><a>11. Temperature Effects</a></li>
+      <li onclick="show('breakdown')"><a>12. Breakdown of Diodes</a></li>
+      <li onclick="show('zener')"><a>13. Zener Diode</a></li>
+      <li onclick="show('formulas')"><a>14. Key Formulas</a></li>
+    </ul>
+  </div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div id="content_area">
+
+
+    <!-- ════════════════════════ -->
+    <!-- 1. SEMICONDUCTORS -->
+    <!-- ════════════════════════ -->
+    <div id="page_sc_intro" class="section-page active">
+      <span id="page_subject">1. Semiconductors</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Know the band gap values for all three — semiconductor, conductor, insulator. Very commonly tested.</div>
+
+      <h1 class="section_head">Types of Semiconductors</h1>
+      <ul class="study_list">
+        <li><strong>Pure / Intrinsic Semiconductor</strong> — used in PIN diode</li>
+        <li><strong>Doped / Extrinsic Semiconductor</strong> — P-type or N-type depending on dopant</li>
+      </ul>
+
+      <h1 class="section_head">Energy Bands</h1>
+
+      <span class="para_heading">For Semiconductors:</span>
+      <ul class="study_list">
+        <li>Energy Band Gap (Forbidden Energy Gap) = <strong>0.3 eV to 1.5 eV</strong></li>
+        <li>C.B. (Conduction Band) is above V.B. (Valence Band)</li>
+        <li>Types: T (Transistor), R (Rectifier), G (Gate)</li>
+      </ul>
+
+      <span class="para_heading">For Conductors:</span>
+      <ul class="study_list">
+        <li>Overlapping of bands — C.B. and V.B. overlap</li>
+        <li>Types: T (Transistor), R (Rectifier)</li>
+      </ul>
+
+      <span class="para_heading">For Insulators:</span>
+      <ul class="study_list">
+        <li>Band gap <strong>&gt; 5 eV</strong></li>
+        <li>Only when very high voltage is applied, current passes for very short time</li>
+        <li>V.B. energy levels are filled — cannot support conduction</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> 1 eV = 1.6 × 10⁻¹⁹ C = 1.6 × 10⁻¹⁹ J</div>
+      <div class="note_box"><strong>★ NOTE:</strong> E_photon = hc / λ</div>
+
+      <span class="col_head">Band Gap Summary</span>
+      <table class="data_table">
+        <thead><tr><th>Material</th><th>Band Gap</th><th>Behaviour</th></tr></thead>
+        <tbody>
+          <tr><td>Conductor</td><td>0 eV (overlap)</td><td>Always conducts</td></tr>
+          <tr><td class="hl">Semiconductor</td><td class="hl">0.3 – 1.5 eV</td><td class="hl">Conducts under conditions</td></tr>
+          <tr><td>Insulator</td><td>&gt; 5 eV</td><td>Barely conducts</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 2. SC MATERIALS -->
+    <!-- ════════════════════════ -->
+    <div id="page_materials" class="section-page">
+      <span id="page_subject">2. Semiconductor Materials (Group Elements)</span>
+
+      <h1 class="section_head">Group IV Elements</h1>
+      <ul class="study_list">
+        <li>C (Carbon), Si (Silicon), Ge (Germanium), Sn (Tin), Pb (Lead)</li>
+        <li><strong>Si and Ge</strong> → Proper band gap → Used as semiconductors</li>
+        <li>C, Sn, Pb → Too small band gap / wrong properties → not used</li>
+      </ul>
+
+      <h1 class="section_head">Group III Elements — used for P-type doping</h1>
+      <ul class="study_list">
+        <li>B (Boron), Al (Aluminium), Ga (Gallium)</li>
+        <li><strong>3 outermost electrons</strong> — creates a hole when added to Si/Ge lattice</li>
+        <li>Ga is costly; Boron is most commonly used</li>
+      </ul>
+
+      <h1 class="section_head">Group V Elements — used for N-type doping</h1>
+      <ul class="study_list">
+        <li>N (Nitrogen), P (Phosphorus), As (Arsenic)</li>
+        <li><strong>5 outermost electrons</strong> — 5th electron becomes free (donor electron)</li>
+        <li>As (Arsenic) is commonly used</li>
+      </ul>
+
+      <span class="col_head">Quick Dopant Reference</span>
+      <table class="data_table">
+        <thead><tr><th>Dopant Group</th><th>Elements</th><th>Creates</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>Group III (Acceptors)</td><td>B, Al, Ga</td><td>HOLES</td><td class="yes">P-type</td></tr>
+          <tr><td>Group V (Donors)</td><td>P, As, N</td><td>Free Electrons</td><td class="no">N-type</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 3. TRANSISTOR & DIGITAL -->
+    <!-- ════════════════════════ -->
+    <div id="page_transistor" class="section-page">
+      <span id="page_subject">3. Transistor &amp; Digital Basics</span>
+
+      <h1 class="section_head">Transistor</h1>
+      <ul class="study_list">
+        <li>Radio communication through air — first done by <strong>Marconi</strong></li>
+        <li>Transistor invented by <strong>William Shockley</strong> (Nobel Prize winner)</li>
+        <li>Used for memory (0 or 1) and digital operations</li>
+      </ul>
+
+      <h1 class="section_head">Logic Gates</h1>
+      <ul class="study_list">
+        <li>A and B → OR gate → output O</li>
+        <li>NAND gate = F · NAND</li>
+        <li>NOR gate — output cannot be saved / stored</li>
+      </ul>
+
+      <h1 class="section_head">Circuits: Analog vs Digital</h1>
+      <ul class="study_list">
+        <li><strong>A.C. Circuits</strong> → Analog Circuits &nbsp;{Average value = 0}</li>
+        <li><strong>D.C. Circuits</strong> → Digital Circuits &nbsp;{0, 1} — can be saved (Discrete Data) &nbsp;{Avg ≠ 0}</li>
+        <li><strong>ADC</strong> = Analog to Digital Circuit</li>
+        <li><strong>DAC</strong> = Digital to Analog Circuit</li>
+      </ul>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 4. INTRINSIC SC -->
+    <!-- ════════════════════════ -->
+    <div id="page_intrinsic" class="section-page">
+      <span id="page_subject">4. Intrinsic Semiconductor</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Know what happens at 0K vs 300K. Holes stay in V.B., electrons go to C.B.</div>
+
+      <h1 class="section_head">Silicon at 0 K</h1>
+      <ul class="study_list">
+        <li>Si atoms form <strong>covalent bonds</strong> with 4 neighbouring atoms</li>
+        <li>At 0 K, all bonds complete → acts as <strong>INSULATOR</strong></li>
+        <li>Ec (Conduction Band) is empty — no electrons available for conduction</li>
+      </ul>
+
+      <h1 class="section_head">Silicon at 300 K (Room Temperature = 27°C)</h1>
+      <ul class="study_list">
+        <li>Thermal energy breaks covalent bonds</li>
+        <li>Free electrons move to <strong>Conduction Band (C.B.)</strong></li>
+        <li><strong>HOLES</strong> remain in Valence Band (V.B.)</li>
+        <li>Semiconductor behaviour — current can now flow</li>
+      </ul>
+
+      <h1 class="section_head">Key Properties</h1>
+      <ul class="study_list">
+        <li>Holes = deficiency of electrons (e⁻), remain <em>only</em> in V.B.</li>
+        <li>Electrons (e⁻) can move to C.B.</li>
+        <li>Holes have a <strong>(+ve) charge</strong> equal to magnitude of electron charge</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> In Semiconductor: Conductivity (σ) ∝ Temperature — conductivity INCREASES with temperature (opposite to metals)</div>
+
+      <h1 class="section_head">Charge Carrier Concentration</h1>
+      <ul class="study_list">
+        <li>When a covalent bond breaks → <strong>1 electron + 1 hole</strong> created (always a pair)</li>
+        <li>nₑ = nₚ → No. of holes = No. of electrons (in pure/intrinsic semiconductor)</li>
+        <li>If n covalent bonds break → <strong>2n charge carriers</strong> are created</li>
+        <li>For intrinsic SC: <code class="f">nₑ = nₚ = nᵢ</code> (intrinsic concentration)</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> Mass Action Law is <strong>INDEPENDENT</strong> of doping concentration: &nbsp;<code class="f">nₑ × nₚ = nᵢ²</code></div>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 5. EXTRINSIC SC -->
+    <!-- ════════════════════════ -->
+    <div id="page_extrinsic" class="section-page">
+      <span id="page_subject">5. Extrinsic (Doped) Semiconductor</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> P-type = holes majority, N-type = electrons majority. The <em>dopant</em> cannot move — only the carriers can.</div>
+
+      <h1 class="section_head">P-Type Semiconductor</h1>
+      <ul class="study_list">
+        <li>Doped with <strong>Group III element</strong> (e.g., Boron)</li>
+        <li>Boron has 3 valence electrons → creates a <strong>HOLE</strong> (vacant site) in crystal lattice</li>
+        <li>Holes and e⁻ can move, but B atom <em>cannot</em> move from its lattice</li>
+        <li>Acceptor energy level (EA) just above VB — holes created easily</li>
+        <li><strong>Majority carriers = HOLES</strong> &nbsp;(nₚ &gt;&gt; nₑ)</li>
+        <li>Minority carriers = electrons</li>
+      </ul>
+
+      <h1 class="section_head">N-Type Semiconductor</h1>
+      <ul class="study_list">
+        <li>Doped with <strong>Group V element</strong> (e.g., Phosphorus)</li>
+        <li>P has 5 valence electrons → 5th electron is LOOSELY CONNECTED → becomes free electron</li>
+        <li><strong>Majority carriers = Electrons</strong> &nbsp;(nₑ &gt;&gt; nₚ)</li>
+        <li>Minority carriers = holes</li>
+        <li>Donor energy level (ED) just below CB — easily emptied at room temperature</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> Concentration of Donor atoms ≈ Concentration of electrons (majority). Minority holes are ignored in N-type calculations.</div>
+
+      <h1 class="section_head">Mass Action Law Application</h1>
+      <pre class="formula">For P-type:   nₑ = nᵢ² / nₚ = nᵢ² / NA      [minority electrons]
+For N-type:   nₚ = nᵢ² / nₑ = nᵢ² / ND      [minority holes]</pre>
+
+      <span class="col_head">P-type vs N-type Comparison</span>
+      <table class="data_table">
+        <thead><tr><th>Property</th><th>P-Type</th><th>N-Type</th></tr></thead>
+        <tbody>
+          <tr><td>Dopant Group</td><td>Group III (Acceptors)</td><td>Group V (Donors)</td></tr>
+          <tr><td>Example Dopant</td><td>Boron (B)</td><td>Phosphorus (P) / Arsenic (As)</td></tr>
+          <tr><td>Majority Carriers</td><td class="yes">Holes</td><td class="no">Electrons</td></tr>
+          <tr><td>Minority Carriers</td><td>Electrons</td><td>Holes</td></tr>
+          <tr><td>Energy Level Added</td><td>Acceptor level (EA) — near VB</td><td>Donor level (ED) — near CB</td></tr>
+          <tr><td>Formula (minority)</td><td>nₑ = nᵢ²/NA</td><td>nₚ = nᵢ²/ND</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 6. CONDUCTIVITY -->
+    <!-- ════════════════════════ -->
+    <div id="page_conductivity" class="section-page">
+      <span id="page_subject">6. Conductivity &amp; Mobility</span>
+
+      <h1 class="section_head">Mobility (μ)</h1>
+      <ul class="study_list">
+        <li>Mobility is a <strong>material property</strong></li>
+        <li>Drift velocity: <code class="f">v = μE</code> &nbsp;(v = drift velocity, E = electric field)</li>
+      </ul>
+
+      <pre class="formula">Unit of μ = (m/s) ÷ (V/m) = m²/(V·s)   or   cm²/(V·s)</pre>
+
+      <div class="note_box"><strong>★ NOTE:</strong> μₑ ≈ 2μₕ — electron mobility is about <strong>twice</strong> hole mobility</div>
+
+      <h1 class="section_head">Conductivity Formulas</h1>
+      <ul class="study_list">
+        <li>Conductivity depends on <strong>charge carrier concentration AND mobility</strong></li>
+      </ul>
+
+      <pre class="formula">General (Semiconductors):   σ = nₑ·q·μₑ + nₕ·q·μₕ
+                                   ↑ electrons    ↑ holes
+
+Intrinsic SC:               σ = nᵢ·q·(μₑ + μₕ)      [since nₑ = nₕ = nᵢ]
+
+N-Type (Extrinsic):         σ ≈ ND·q·μₑ              [nₕqμₕ neglected — minority]
+
+P-Type (Extrinsic):         σ ≈ NA·q·μₕ              [nₑqμₑ neglected — minority]
+
+Resistivity:                ρ = 1/σ</pre>
+
+      <h1 class="section_head">Current Density (J)</h1>
+      <ul class="study_list">
+        <li><code class="f">J = I/A</code> &nbsp;(Current density = current per unit area)</li>
+        <li><code class="f">J = σ·E = E/ρ</code></li>
+        <li>Since v_d = μE: &nbsp;<code class="f">J = nqv_d</code></li>
+      </ul>
+
+      <pre class="formula">V = E × l        (voltage = field × length)
+J = V / (ρ × l)  = σ × V / l</pre>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 7. NUMERICALS -->
+    <!-- ════════════════════════ -->
+    <div id="page_numericals" class="section-page">
+      <span id="page_subject">7. Solved Numerical Problems</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Follow the exact steps shown. Show units at every step for full marks.</div>
+
+      <!-- Q1 -->
+      <div class="problem_block">
+        <span class="q_label">Q.1 — N-type Semiconductor (Mass Action Law)</span>
+        <span class="given">A semiconductor doped with donor atom concentration N<sub>D</sub> = 10¹⁸/cm³. Intrinsic concentration nᵢ = 10¹⁰/cm³. Find carrier concentrations.</span>
+
+        <span class="para_heading">Solution:</span>
+        <ul class="study_list">
+          <li>Given: N<sub>D</sub> = 10¹⁸/cm³, &nbsp;nᵢ = 10¹⁰/cm³</li>
+          <li>Since N<sub>D</sub> &gt;&gt; nᵢ: &nbsp;&nbsp;<strong>nₑ ≈ N<sub>D</sub> = 10¹⁸/cm³</strong> &nbsp;(majority)</li>
+          <li>Using mass action law: &nbsp;<code class="f">nₕ = nᵢ²/nₑ = (10¹⁰)²/10¹⁸ = 10²⁰/10¹⁸ = <strong>10²/cm³</strong></code> &nbsp;(minority)</li>
+          <li>Total charge carriers ≈ N<sub>D</sub> + 2nₕ ≈ N<sub>D</sub> ≈ <strong>10¹⁸/cm³</strong></li>
+        </ul>
+      </div>
+
+      <!-- Q2 -->
+      <div class="problem_block">
+        <span class="q_label">Q.2 — Germanium Intrinsic Semiconductor</span>
+        <span class="given">Pure Ge: nᵢ = 2.5 × 10¹³/cm³, μₕ = 1800 cm²/V·s, μₑ = 3800 cm²/V·s</span>
+
+        <span class="para_heading">(a) Find Resistivity (ρ) of pure Ge:</span>
+        <pre class="formula">σ = q·nᵢ·(μₑ + μₕ)
+σ = 1.6×10⁻¹⁹ × 2.5×10¹³ × (3800 + 1800)
+σ = 1.6×10⁻¹⁹ × 2.5×10¹³ × 5600
+σ = 22400 × 10⁻⁶ Ω⁻¹cm⁻¹
+
+ρ = 1/σ ≈ 44.6 Ω·cm</pre>
+
+        <span class="para_heading">(b) Add N<sub>D</sub> = 4.4 × 10¹²/cm³ (N-type doping). Find ρ:</span>
+        <pre class="formula">σₙ = ND·q·μₑ = 4.4×10¹² × 1.6×10⁻¹⁹ × 3800
+σₙ = 26752 × 10⁻⁷ Ω⁻¹cm⁻¹
+
+ρₙ = 1/σₙ = 373.80 Ω·cm</pre>
+      </div>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 8. DIFFUSION CURRENT -->
+    <!-- ════════════════════════ -->
+    <div id="page_diffusion" class="section-page">
+      <span id="page_subject">8. Diffusion Current</span>
+
+      <h1 class="section_head">Definition</h1>
+      <ul class="study_list">
+        <li>Diffusion current occurs <strong>only in semiconductors</strong> (not metals)</li>
+        <li>Caused by <strong>concentration gradient</strong> — when light/heat falls on SC, carriers move from higher concentration area to lower concentration area</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> Direction of drift current and diffusion current may be the <strong>same or different</strong> — depends on bias conditions.</div>
+
+      <span class="col_head">Drift vs Diffusion Current</span>
+      <table class="data_table">
+        <thead><tr><th>Property</th><th>Drift Current</th><th>Diffusion Current</th></tr></thead>
+        <tbody>
+          <tr><td>Cause</td><td>Electric field (E)</td><td>Concentration gradient</td></tr>
+          <tr><td>Occurs in</td><td>Conductors &amp; Semiconductors</td><td>Semiconductors only</td></tr>
+          <tr><td>Direction</td><td>Along electric field (for holes)</td><td>From high to low concentration</td></tr>
+          <tr><td>Formula</td><td>J_drift = σE</td><td>J_diff = qD(dn/dx)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 9. DIODE -->
+    <!-- ════════════════════════ -->
+    <div id="page_diode" class="section-page">
+      <span id="page_subject">9. Diode (P-N Junction)</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Know forward bias = P to +ve terminal. Si drop = 0.7V, Ge drop = 0.3V. Depletion region direction matters.</div>
+
+      <h1 class="section_head">Definition</h1>
+      <ul class="study_list">
+        <li>P-N Junction Diode: A <strong>two-terminal, unidirectional</strong> P-N junction device</li>
+        <li>Allows flow of current from <strong>P-side to N-side</strong> (conventional current direction)</li>
+        <li>It is a <strong>PASSIVE</strong> element</li>
+        <li>Symbol: &nbsp;<code class="f">( I →|→ )</code></li>
+        <li>General purpose diode: <strong>1N4007</strong></li>
+      </ul>
+
+      <h1 class="section_head">P-N Junction Formation</h1>
+      <ul class="study_list">
+        <li>When P and N materials are joined → diffusion occurs at junction (concentration gradient)</li>
+        <li>Holes from P-side combine with electrons from N-side → forms covalent bonds</li>
+        <li><strong>DEPLETION REGION</strong> forms at the junction</li>
+        <li>Electric field (E) builds up → opposes further diffusion</li>
+        <li><strong>Barrier potential (V₀)</strong> is created</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> In depletion region: fixed <strong>positive ions on N-side</strong>, fixed <strong>negative ions on P-side</strong></div>
+
+      <h1 class="section_head">Barrier Potential Values</h1>
+      <table class="data_table">
+        <thead><tr><th>Material</th><th>Barrier Potential (V₀)</th><th>Forward Bias Drop</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Silicon (Si)</strong></td><td>~0.7 V</td><td class="hl">0.7 V</td></tr>
+          <tr><td><strong>Germanium (Ge)</strong></td><td>~0.3 V</td><td class="hl">0.3 V</td></tr>
+        </tbody>
+      </table>
+
+      <h1 class="section_head">Forward Bias (F.B.)</h1>
+      <ul class="study_list">
+        <li><strong>N connected to –ve terminal, P to +ve terminal</strong></li>
+        <li>Applied voltage <em>opposes</em> barrier potential</li>
+        <li>When Vₚ – Vₙ ≥ V₀ → current flows</li>
+        <li>Depletion width <strong>decreases</strong> → diode acts as short circuit (ideal)</li>
+        <li>Real diode has <strong>0.7 V (Si) or 0.3 V (Ge)</strong> drop across it</li>
+      </ul>
+
+      <h1 class="section_head">Reverse Bias (R.B.)</h1>
+      <ul class="study_list">
+        <li><strong>N connected to +ve terminal, P to –ve terminal</strong></li>
+        <li>Vₚ &lt; Vₙ → Diode becomes <strong>OPEN CIRCUITED</strong></li>
+        <li>Depletion width <strong>increases</strong> + charge concentration increases</li>
+        <li>Only very small <strong>reverse saturation current (I<sub>S0</sub>)</strong> flows — due to minority carriers</li>
+      </ul>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 10. I-V CHARACTERISTICS -->
+    <!-- ════════════════════════ -->
+    <div id="page_iv_char" class="section-page">
+      <span id="page_subject">10. I-V Characteristics of Diode</span>
+
+      <h1 class="section_head">Diode Current Equation</h1>
+      <pre class="formula">I_D = I_S0 · [ exp(V_D / n·V_T) – 1 ]
+
+Where:
+  V_D  = Diode voltage = Vₚ – Vₙ
+  n    = Ideality factor    (Si: n = 2,  Ge: n = 1)
+  V_T  = Thermal voltage = kT(K) / q
+  k    = 1.38 × 10⁻²³ J/K   (Boltzmann's constant)
+  I_S0 = Reverse saturation current (due to minority carriers)</pre>
+
+      <div class="note_box"><strong>★ NOTE:</strong> At room temperature (300K): <code class="f">V_T ≈ 26 mV</code></div>
+
+      <h1 class="section_head">I-V Curve Regions</h1>
+      <ul class="study_list">
+        <li><strong>Forward Bias region:</strong> Exponential rise in current after V₀ (cut-in voltage)</li>
+        <li><strong>Reverse Bias region:</strong> Tiny saturation current I<sub>S0</sub> (in μA) — nearly flat</li>
+        <li><strong>Breakdown region:</strong> Sudden large reverse current at V<sub>Break</sub></li>
+      </ul>
+
+      <h1 class="section_head">Resistance Types</h1>
+
+      <span class="para_heading">Static Resistance (DC Resistance) — r_DC</span>
+      <pre class="formula">r_DC = V_D / I_D     (ratio at a specific operating point)</pre>
+
+      <span class="para_heading">Dynamic Resistance (AC Resistance) — r_ac</span>
+      <ul class="study_list">
+        <li>Also called: small signal resistance or incremental resistance</li>
+        <li><code class="f">r_ac = dV_D / dI_D</code> &nbsp;(slope of I-V curve at operating point)</li>
+      </ul>
+      <pre class="formula">r_ac = n·V_T / I_D</pre>
+
+      <div class="note_box"><strong>★ NOTE:</strong> r_ac range: 1 Ω to 50 Ω &nbsp;|&nbsp; <strong>r_ac &lt; r_DC always</strong></div>
+
+      <span class="para_heading">Average / Chord Resistance</span>
+      <pre class="formula">r_avg = ΔV / ΔI    (slope of chord between two operating points)</pre>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 11. TEMPERATURE EFFECTS -->
+    <!-- ════════════════════════ -->
+    <div id="page_temp_effect" class="section-page">
+      <span id="page_subject">11. Effect of Temperature on Diode</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Temperature increases → I_S doubles every 10°C. V_D decreases 2.5 mV per °C. Both cause left shift of I-V curve.</div>
+
+      <h1 class="section_head">Reverse Bias — Effect on Minority Carriers</h1>
+      <ul class="study_list">
+        <li>If T ↑ by <strong>10°C</strong> → I_S × 2 (reverse saturation current <strong>doubles</strong>)</li>
+        <li>If T ↑ → <strong>left shift</strong> of I_D curve</li>
+        <li>Used in <strong>fire detectors</strong> (temperature sensitive device)</li>
+      </ul>
+
+      <h1 class="section_head">Forward Bias — Effect</h1>
+      <ul class="study_list">
+        <li>If T ↑ → V_D ↓ = <strong>2.5 mV/°C</strong> (voltage drop decreases with temperature)</li>
+        <li>If T ↑ → left shift of I_D curve (same current at lower applied voltage)</li>
+      </ul>
+
+      <span class="col_head">Temperature Effect Summary</span>
+      <table class="data_table">
+        <thead><tr><th>Parameter</th><th>Effect of Temperature ↑</th></tr></thead>
+        <tbody>
+          <tr><td>Reverse saturation current (I_S)</td><td class="hl">Doubles every 10°C</td></tr>
+          <tr><td>Forward voltage drop (V_D)</td><td>Decreases by 2.5 mV/°C</td></tr>
+          <tr><td>I-V curve shift</td><td>Left shift (both bias conditions)</td></tr>
+          <tr><td>Conductivity (σ)</td><td>Increases (more thermal energy breaks bonds)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 12. BREAKDOWN -->
+    <!-- ════════════════════════ -->
+    <div id="page_breakdown" class="section-page">
+      <span id="page_subject">12. Breakdown of Diodes</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Avalanche &gt; 6V, Zener &lt; 6V. Avalanche = fatal, Zener = recoverable. Temperature coefficients are opposite.</div>
+
+      <h1 class="section_head">Breakdown Voltage (V_BK)</h1>
+      <ul class="study_list">
+        <li>V_BK depends <strong>INVERSELY</strong> on doping concentration</li>
+        <li>Minimum doping (1/10⁸) → P, N types → very high V_BK</li>
+        <li>Moderate doping (1/10⁵) → P, N types → medium V_BK</li>
+        <li>Maximum / Heavy doping (1/10² or 1/10³) → P⁺, N⁺ types → very low V_BK</li>
+      </ul>
+
+      <h1 class="section_head">1. Avalanche Breakdown</h1>
+      <ul class="study_list">
+        <li>Occurs at <strong>&gt; 6V</strong> breakdown voltage</li>
+        <li>Moderate or minimum doping</li>
+        <li>Mechanism: <strong>IMPACT IONIZATION</strong> — minority charge carriers collide with ions of depletion region → creates more ions/holes/electrons → chain reaction → large current</li>
+        <li>Large amount of heat released → diode <strong>CANNOT RECOVER</strong></li>
+        <li>Avalanche breakdown is <strong>FATAL</strong> in nature</li>
+        <li><strong>Positive temperature coefficient:</strong> T ↑ → breakdown voltage ↑</li>
+      </ul>
+
+      <h1 class="section_head">2. Zener Breakdown</h1>
+      <ul class="study_list">
+        <li>Occurs at <strong>&lt; 6V</strong> breakdown voltage</li>
+        <li><strong>Heavy doping</strong> required</li>
+        <li>Mechanism: High electric field causes <strong>RUPTURE of covalent bonds</strong> → generates carriers</li>
+        <li>E ↑ and W (depletion width) ↓ — thin depletion region due to heavy doping</li>
+        <li>Covalent bond ruptured by high E can be <strong>RECOVERED</strong> → diode can be used again</li>
+        <li>Zener breakdown is <strong>NON-FATAL</strong></li>
+        <li><strong>Negative temperature coefficient:</strong> T ↑ → breakdown voltage ↓ (breaks earlier)</li>
+      </ul>
+
+      <div class="note_box"><strong>★ NOTE:</strong> For <em>forward bias</em>: both Avalanche and Zener diodes act similarly — the difference is only in reverse bias breakdown behaviour.</div>
+
+      <span class="col_head">Avalanche vs Zener Breakdown</span>
+      <table class="data_table">
+        <thead><tr><th>Property</th><th>Avalanche Breakdown</th><th>Zener Breakdown</th></tr></thead>
+        <tbody>
+          <tr><td>Voltage</td><td>&gt; 6V</td><td>&lt; 6V</td></tr>
+          <tr><td>Doping</td><td>Moderate / Minimum</td><td>Heavy (P⁺, N⁺)</td></tr>
+          <tr><td>Mechanism</td><td>Impact Ionization (chain)</td><td>Covalent bond rupture</td></tr>
+          <tr><td>Recovery</td><td class="yes">FATAL — cannot recover</td><td class="no">NON-FATAL — recovers</td></tr>
+          <tr><td>Temp. Coefficient</td><td>Positive (+ve)</td><td>Negative (–ve)</td></tr>
+          <tr><td>Heat Released</td><td>Large amount</td><td>Less</td></tr>
+          <tr><td>Depletion Width (W)</td><td>Wide</td><td>Thin (narrows with heavy doping)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 13. ZENER DIODE -->
+    <!-- ════════════════════════ -->
+    <div id="page_zener" class="section-page">
+      <span id="page_subject">13. Zener Diode &amp; Applications</span>
+
+      <h1 class="section_head">Zener Diode as Voltage Regulator</h1>
+      <ul class="study_list">
+        <li>Zener Diode is used as a <strong>VOLTAGE REGULATOR</strong></li>
+        <li>Avalanche Diode <strong>CANNOT</strong> be used as voltage regulator (fatal breakdown)</li>
+        <li>Symbol: ⊣ (with bent/Z-shaped cathode line)</li>
+        <li>Works in <strong>reverse bias</strong> breakdown region — maintains constant voltage across load</li>
+      </ul>
+
+      <div class="def_block">
+        <span class="term">Why Zener works as regulator:</span>
+        <span class="meaning"> In breakdown, even if current changes, voltage across zener stays nearly constant = V_Z. This regulated output is used as a stable reference voltage.</span>
+      </div>
+
+      <h1 class="section_head">Application: Diodes as Rectifiers</h1>
+      <ul class="study_list">
+        <li>Diodes used in rectifier circuits to convert <strong>AC → DC</strong></li>
+        <li><strong>Half-wave rectifier:</strong> One diode — uses only <em>half</em> of AC cycle</li>
+        <li><strong>Full-wave rectifier:</strong> Uses both halves of AC cycle (bridge or centre-tap circuit)</li>
+      </ul>
+
+      <table class="data_table">
+        <thead><tr><th>Type</th><th>Diodes Used</th><th>Output</th><th>Efficiency</th></tr></thead>
+        <tbody>
+          <tr><td>Half-Wave Rectifier</td><td>1 diode</td><td>Pulsating DC (half cycles)</td><td>~40.6%</td></tr>
+          <tr><td>Full-Wave (Bridge)</td><td>4 diodes</td><td>Pulsating DC (both cycles)</td><td>~81.2%</td></tr>
+          <tr><td>Full-Wave (Centre-tap)</td><td>2 diodes</td><td>Pulsating DC (both cycles)</td><td>~81.2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ════════════════════════ -->
+    <!-- 14. FORMULAS -->
+    <!-- ════════════════════════ -->
+    <div id="page_formulas" class="section-page">
+      <span id="page_subject">14. Quick Reference — Key Formulas</span>
+
+      <div class="tip_box"><strong>★ Exam Tip:</strong> Write formulas with units. Examiners check for correct substitution and unit consistency.</div>
+
+      <span class="col_head">Constants</span>
+      <pre class="formula">q  = 1.6 × 10⁻¹⁹ C           (electron charge)
+k  = 1.38 × 10⁻²³ J/K        (Boltzmann's constant)
+V_T = kT/q ≈ 26 mV at 300K   (Thermal voltage at room temp)</pre>
+
+      <span class="col_head">Carrier Concentration</span>
+      <pre class="formula">Mass Action Law:   nₑ × nₚ = nᵢ²      [always, regardless of doping]
+
+Intrinsic:         nₑ = nₚ = nᵢ
+
+N-type minority:   nₚ = nᵢ² / ND
+P-type minority:   nₑ = nᵢ² / NA</pre>
+
+      <span class="col_head">Mobility &amp; Conductivity</span>
+      <pre class="formula">Drift velocity:    v = μE
+
+Conductivity (general):   σ = nₑqμₑ + nₕqμₕ
+Conductivity (intrinsic): σ = nᵢq(μₑ + μₕ)
+Conductivity (N-type):    σ ≈ ND·q·μₑ
+Conductivity (P-type):    σ ≈ NA·q·μₕ
+
+Resistivity:      ρ = 1/σ
+Current density:  J = σE = I/A</pre>
+
+      <span class="col_head">Diode Equations</span>
+      <pre class="formula">Diode current:   I_D = I_S0 · [exp(V_D / n·V_T) – 1]
+
+Static resistance:   r_DC = V_D / I_D
+Dynamic resistance:  r_ac = n·V_T / I_D    (1Ω to 50Ω; always r_ac &lt; r_DC)
+
+Temperature:     ΔI_S / ΔT → doubles every 10°C
+                 ΔV_D / ΔT = –2.5 mV/°C  (forward bias)</pre>
+
+      <span class="col_head">Key Values to Memorize</span>
+      <table class="data_table">
+        <thead><tr><th>Parameter</th><th>Silicon (Si)</th><th>Germanium (Ge)</th></tr></thead>
+        <tbody>
+          <tr><td>Barrier potential V₀</td><td class="hl">0.7 V</td><td class="hl">0.3 V</td></tr>
+          <tr><td>Ideality factor (n)</td><td>2</td><td>1</td></tr>
+          <tr><td>Band gap</td><td>1.1 eV</td><td>0.67 eV</td></tr>
+          <tr><td>Majority in intrinsic</td><td colspan="2">nₑ = nₕ = nᵢ</td></tr>
+          <tr><td>V_T at 300K</td><td colspan="2">≈ 26 mV</td></tr>
+          <tr><td>Avalanche breakdown</td><td colspan="2">&gt; 6V</td></tr>
+          <tr><td>Zener breakdown</td><td colspan="2">&lt; 6V</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note_box"><strong>★ All the best for your exam! ★</strong></div>
+    </div>
+
+  </div><!-- end content_area -->
+</div><!-- end wrapper -->
+
+<div id="ftr">
+  BEE Exam Notes &mdash; Basic Electronics Engineering &mdash; Semiconductors &amp; Diodes &mdash;
+  <em>Good luck!</em>
+</div>
+
+<script>
+const pages = [
+  'sc_intro','materials','transistor','intrinsic','extrinsic',
+  'conductivity','numericals','diffusion','diode','iv_char',
+  'temp_effect','breakdown','zener','formulas'
+];
+
+function show(key) {
+  pages.forEach(k => {
+    const el = document.getElementById('page_' + k);
+    if (el) el.classList.remove('active');
+  });
+
+  const target = document.getElementById('page_' + key);
+  if (target) target.classList.add('active');
+
+  const items = document.querySelectorAll('#main_nav li');
+  items.forEach(li => li.classList.remove('active'));
+
+  const idx = pages.indexOf(key);
+  if (items[idx]) items[idx].classList.add('active');
+
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
